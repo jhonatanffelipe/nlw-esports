@@ -9,7 +9,7 @@ import { GameBanner } from "./components/GameBanner";
 import { CreateAdBanner } from "./components/CreateAdBanner";
 import { GameController } from "phosphor-react";
 
-interface Game {
+interface IGame {
   id: string;
   title: string;
   bannerUrl: string;
@@ -18,7 +18,7 @@ interface Game {
   };
 }
 function App() {
-  const [games, setGames] = useState<Game[]>([]);
+  const [games, setGames] = useState<IGame[]>([]);
 
   function listGames() {
     fetch("http://localhost:3333/games")

@@ -30,7 +30,7 @@ export function Game() {
   }
 
   function listAdsByGames() {
-    fetch(`http://192.168.1.35:3333/games/${game.id}/ads`)
+    fetch(`http://192.168.0.114:3333/games/${game.id}/ads`)
       .then((response) => response.json())
       .then((data) => {
         setDuos(data);
@@ -38,7 +38,7 @@ export function Game() {
   }
 
   async function getDiscordUset(adsId: string) {
-    fetch(`http://192.168.1.35:3333/games/ads/${adsId}/discord`)
+    fetch(`http://192.168.0.114:3333/games/ads/${adsId}/discord`)
       .then((response) => response.json())
       .then((data) => {
         setDiscordDuoSelected(data.discord);

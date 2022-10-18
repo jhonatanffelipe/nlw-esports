@@ -15,9 +15,11 @@ export function Home() {
   const [games, setGames] = useState<IGameCardProps[]>([]);
 
   function listGames() {
-    fetch("http://192.168.1.35:3333/games")
+    fetch("http://192.168.0.114:3333/games") // Adicionar o IP da Maquina
       .then((response) => response.json())
       .then((data) => {
+        console.log("data");
+
         setGames(data);
       });
   }

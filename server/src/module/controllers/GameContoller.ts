@@ -3,26 +3,35 @@ import { Request, Response } from "express";
 import GameService from "../services/GameService";
 
 export default class GameController {
-  public async listGame(
+  private gameService: GameService;
+
+  constructor() {
+    this.gameService = new GameService();
+  }
+
+  public listGame = async (
     request: Request,
     response: Response
-  ): Promise<Response> {
-    const service = new GameService();
-    const games = await service.listGame();
+  ): Promise<Response> => {
+    const games = await this.gameService.listGame();
     return response.json(games);
-  }
+  };
 
-  async listAds(request: Request, response: Response): Promise<Response> {
-    const service = new GameService();
+  public listAds = async (
+    request: Request,
+    response: Response
+  ): Promise<Response> => {
     const gameId = request.params.id;
-    const ads = await service.listAds(gameId);
+    const ads = await this.gameService.listAds(gameId);
     return response.json(ads);
-  }
+  };
 
-  async createAd(request: Request, response: Response): Promise<Response> {
+  public createAd = async (
+    request: Request,
+    response: Response
+  ): Promise<Response> => {
     const gameId = request.params.id;
 
-    const service = new GameService();
     const {
       name,
       yearsPlaying,
@@ -33,7 +42,7 @@ export default class GameController {
       useVoiceChannel,
     } = request.body;
 
-    const ad = await service.createAd({
+    const ad = await this.gameService.createAd({
       gameId,
       name,
       yearsPlaying,
@@ -45,12 +54,14 @@ export default class GameController {
     });
 
     return response.json(ad);
-  }
+  };
 
-  async getDiscord(request: Request, response: Response): Promise<Response> {
-    const service = new GameService();
+  public getDiscord = async (
+    request: Request,
+    response: Response
+  ): Promise<Response> => {
     const adId = request.params.id;
-    const discord = await service.getDiscord(adId);
+    const discord = await this.gameService.getDiscord(adId);
     return response.json(discord);
-  }
+  };
 }
